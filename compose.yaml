@@ -1,0 +1,11 @@
+services:
+  xception:
+    build: .
+    image: xception-nowcast:local
+    restart: unless-stopped
+    stop_grace_period: 20m
+    user: "${XCEPTION_UID:?Set XCEPTION_UID to your host user ID}:${XCEPTION_GID:?Set XCEPTION_GID to your host group ID}"
+    env_file: .env
+    volumes:
+      - ./artifacts/v1:/app/artifacts/v1
+      - ./outputs:/app/outputs
